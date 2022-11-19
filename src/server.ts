@@ -35,14 +35,4 @@ app.get('/posts', verifyToken, (req: Request, res: Response) => {
   res.json(posts.filter((post) => post.username === req.payload?.name));
 });
 
-app.post('/login', (req: Request, res: Response) => {
-  // TODO authenticate user
-
-  const username: string = req.body.username;
-  const payload: Payload = { name: username };
-  const accessToken: string = jwt.sign(payload, process.env.SECRET_KEY_TOKEN!);
-
-  res.json({ accessToken: accessToken });
-});
-
 app.listen(3000);
