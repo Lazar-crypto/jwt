@@ -20,6 +20,12 @@ app.post('/login', (req: Request, res: Response) => {
   res.json({ accessToken: accessToken, refreshToken: refreshToken });
 });
 
+app.delete('/logout', (req: Request, res: Response) => {
+  refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
+
+  res.sendStatus(204);
+});
+
 const generateAccessToken = (payload: Payload): string => {
   return jwt.sign(payload, process.env.SECRET_KEY_TOKEN!, { expiresIn: '30s' });
 };
