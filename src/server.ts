@@ -31,8 +31,8 @@ const verifyToken = (
 };
 
 app.get('/posts', verifyToken, (req: Request, res: Response) => {
-  //const { name }: Payload = req.payload;
-  res.json(posts.filter((post) => post.username === req.payload?.name));
+  const { name }: Payload = req.payload as Payload;
+  res.json(posts.filter((post) => post.username === name));
 });
 
 app.listen(3000);
